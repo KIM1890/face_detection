@@ -14,10 +14,9 @@ def insertOrUpdate(Id, Name, Age, Gender):
     for row in cursor:
         isRecordExist = 1
     if (isRecordExist == 1):
-        cmd = "UPDATE People SET Name=" + str(Name) + "WHERE ID=" + str(Id)
+        cmd = "UPDATE People SET Name='" + str(Name) + "' WHERE ID= '" + str(Id) + "'"
     else:
-        cmd = "INSERT INTO People(Name,Age,Gender) Values('" + \
-            str(Name) + "','" + str(Age) + "','" + str(Gender) + "')"
+        cmd = "INSERT INTO People(Id,Name,Age,Gender) Values('"+ str(Id)+"','" + str(Name) + "','" + str(Age) + "','" + str(Gender) + "')"
     conn.execute(cmd)
     conn.commit()
     conn.close()
@@ -40,7 +39,7 @@ while (True):
         # incrementing sample number
         sampleNum = sampleNum + 1
         # saving the captured face in the dataset folder
-        cv2.imwrite("dataSet/User." + id + '.' + str(sampleNum) +
+        cv2.imwrite("dataSet/User." + str(id) + '.' + str(sampleNum) +
                     ".jpg", gray[y:y + h, x:x + w])
 
         cv2.imshow('frame', img)
@@ -48,7 +47,7 @@ while (True):
     if cv2.waitKey(100) & 0xFF == ord('q'):
         break
     # break if the sample number is morethan 20
-    elif sampleNum > 20:
+    elif sampleNum > 5:
         break
 cam.release()
 cv2.destroyAllWindows()
