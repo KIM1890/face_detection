@@ -47,7 +47,7 @@ while (True):
     if cv2.waitKey(100) & 0xFF == ord('q'):
         break
     # break if the sample number is morethan 20
-    elif sampleNum > 5:
+    elif sampleNum > 10:
         break
 cam.release()
 cv2.destroyAllWindows()
